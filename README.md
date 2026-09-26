@@ -27,14 +27,28 @@ covering design, ETL, star schema modelling, and cloud migration.
 - **FactOrderHeader** (grain: order) — measures: TaxAmt, Freight, TotalDue
 - **Dimensions**: DimDate, DimCustomer, DimProduct, DimSalesPerson, DimTerritory
 
+## Key Design Decisions
+
+- **Two fact tables (Constellation Schema)**: TaxAmt and Freight are order-level, 
+  not line-level. Storing them in a line-level fact would cause double-counting.
+- **SCD Type 2 for DimCustomer and DimProduct**: Customer addresses and product 
+  prices change over time; Type 2 allows historical analysis.
+- **Snowflake → Star for DimProduct**: Product → Subcategory → Category (3 levels) 
+  merged into one table to avoid multi-table joins at query time.
+- **Customer Type Handling**: 635 customers have both PersonID and StoreID (B2B 
+  employees). Classified as Individual to avoid double-counting.
+  Final: 19,119 Individual + 701 Store = 19,820.
+
+For full details, see [06-docs/design-decisions.md](06-docs/design-decisions.md).
+
 ## Status
 
 - [x] OLTP data exploration
 - [x] Star schema design
 - [x] DDL for all tables
-- [x] Dimension loading
-- [x] Fact loading
-- [x] Data validation
+- [x] Dimension loading (5 dimensions)
+- [x] Fact loading (2 fact tables)
+- [x] Data validation (reconciliation passed)
 - [ ] Azure migration
 - [ ] Power BI report
 
