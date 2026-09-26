@@ -32,9 +32,9 @@ covering design, ETL, star schema modelling, and cloud migration.
 - [x] OLTP data exploration
 - [x] Star schema design
 - [x] DDL for all tables
-- [ ] Dimension loading
-- [ ] Fact loading
-- [ ] Data validation
+- [x] Dimension loading
+- [x] Fact loading
+- [x] Data validation
 - [ ] Azure migration
 - [ ] Power BI report
 
