@@ -16,12 +16,13 @@ covering design, ETL, star schema modelling, and cloud migration.
 |-------|-----------|
 | Source | SQL Server 2019 (AdventureWorks2019 OLTP) |
 | Orchestration | Azure Data Factory (with Self-Hosted Integration Runtime) |
-| Storage | Azure Data Lake Storage Gen2 (raw / curated / logs) |
+| Storage | Azure Data Lake Storage Gen2 (**raw / curated / gold** / logs) |
 | Compute | Azure Databricks (Serverless, PySpark) |
-| Storage Format | Parquet (raw) + Delta Lake (curated) |
+| Storage Format | Parquet (raw) + Delta Lake (**curated + gold**) |
 | Governance | Unity Catalog (Storage Credential + External Location) |
 | Local DW | SQL Server (AdventureWorksDW) |
 | Modelling | Star Schema (Constellation), SCD Type 2 |
+| Architecture | **Medallion (Bronze → Silver → Gold)** |
 
 
 ## Repository Structure
@@ -40,6 +41,12 @@ covering design, ETL, star schema modelling, and cloud migration.
 - **FactSales** (grain: order line) — measures: OrderQty, UnitPrice, LineTotal
 - **FactOrderHeader** (grain: order) — measures: TaxAmt, Freight, TotalDue
 - **Dimensions**: DimDate, DimCustomer, DimProduct, DimSalesPerson, DimTerritory
+
+## Entity-Relationship Diagram
+
+![AdventureWorks DW ERD](01-design/adventureworks-erd.png)
+
+*Star Schema (Constellation) with 2 fact tables and 5 dimensions.*
 
 ## Key Design Decisions
 
@@ -66,6 +73,8 @@ For full details, see [06-docs/design-decisions.md](06-docs/design-decisions.md)
 - [x] Azure migration (ADLS + ADF + Databricks)
 - [x] PySpark transformations (Delta Lake)
 - [x] Advanced PySpark (window functions, MERGE INTO, broadcast join)
+- [x] Gold layer (4 aggregated tables)
+- [x] Complete Medallion Architecture (Bronze → Silver → Gold)
 - [ ] Power BI report
 
 
@@ -80,6 +89,9 @@ For full details, see [06-docs/design-decisions.md](06-docs/design-decisions.md)
 - Applied window functions (RANK, DENSE_RANK, ROW_NUMBER) and broadcast 
   joins for performance optimisation
 - Configured Unity Catalog with Managed Identity for secure ADLS access
+- Implemented a complete **Medallion Architecture** (Bronze → Silver → Gold) 
+  on Azure Data Lake Storage: raw Parquet (Bronze), transformed Delta tables 
+  (Silver), and aggregated KPI tables (Gold).
 
 
 ## Author
