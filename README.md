@@ -49,7 +49,7 @@ For full details, see [06-docs/design-decisions.md](06-docs/design-decisions.md)
 - [x] Dimension loading (5 dimensions)
 - [x] Fact loading (2 fact tables)
 - [x] Data validation (reconciliation passed)
-- [ ] Azure migration
+- [x] Azure migration - Stage 4.1 (DimDate)
 - [ ] Power BI report
 
 ## Author
