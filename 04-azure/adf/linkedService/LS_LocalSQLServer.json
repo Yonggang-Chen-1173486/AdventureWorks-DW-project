@@ -1,0 +1,21 @@
+{
+	"name": "LS_LocalSQLServer",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "localhost",
+			"database": "AdventureWorks2019",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "adf_reader",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIzZDU4OTQ5Ny0wNjU1LTQ1ZmItYmEwYy03Y2Y4NGI2NTQ4MjMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SHIR-Local-SQLServer",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

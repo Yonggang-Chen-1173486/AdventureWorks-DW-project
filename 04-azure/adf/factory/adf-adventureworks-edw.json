@@ -1,0 +1,15 @@
+{
+	"name": "adf-adventureworks-edw",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "australiaeast",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "2bc8732e-f654-4edb-b096-d5b79ff5f2a6",
+		"tenantId": "2ed27e58-4516-4f9c-a797-94374d2e74c7"
+	}
+}

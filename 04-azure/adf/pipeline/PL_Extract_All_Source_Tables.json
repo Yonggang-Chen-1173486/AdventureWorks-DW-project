@@ -1,0 +1,866 @@
+{
+	"name": "PL_Extract_All_Source_Tables",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Production",
+							"TableName": "Product"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/Product"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Production",
+							"TableName": "ProductSubcategory"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/ProductSubcategory"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy2",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Person",
+							"TableName": "Person"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/Person"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy3",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Sales",
+							"TableName": "Customer"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/Customer"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy4",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Sales",
+							"TableName": "Store"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/Store"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy5",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT [AddressID]\n      ,[AddressLine1]\n      ,[AddressLine2]\n      ,[City]\n      ,[StateProvinceID]\n      ,[PostalCode]\n      ,[rowguid]\n      ,[ModifiedDate]\n  FROM [AdventureWorks2019].[Person].[Address]",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Person",
+							"TableName": "Address"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/Address"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy6",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Person",
+							"TableName": "StateProvince"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/StateProvince"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy7",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Person",
+							"TableName": "CountryRegion"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/CountryRegion"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy8",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Person",
+							"TableName": "BusinessEntityAddress"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/BusinessEntityAddress"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy9",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Person",
+							"TableName": "AddressType"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/AddressType"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy10",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Sales",
+							"TableName": "SalesTerritory"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/SalesTerritory"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy11",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Sales",
+							"TableName": "SalesPerson"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/SalesPerson"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy12",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Sales",
+							"TableName": "SalesOrderHeader"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/SalesOrderHeader"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy13",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Sales",
+							"TableName": "SalesOrderDetail"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/SalesOrderDetail"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data1_copy13_copy1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Production",
+							"TableName": "ProductCategory"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Target_ADLS_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": "AdventureWorks2019/ProductCategory"
+						}
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-09-26T22:21:44Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "SourceDataset_jd3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_LocalSQLServer",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "Production",
+			"table": "Product"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
