@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-adventureworks-edw"
+		},
+		"LS_AzureDataLake_accountKey": {
+			"value": ""
+		},
+		"LS_LocalSQLServer_password": {
+			"value": ""
+		},
+		"LS_AzureDataLake_properties_typeProperties_url": {
+			"value": "https://stadventureworksdw.dfs.core.windows.net/"
+		},
+		"LS_LocalSQLServer_properties_typeProperties_server": {
+			"value": "localhost"
+		},
+		"LS_LocalSQLServer_properties_typeProperties_database": {
+			"value": "AdventureWorks2019"
+		},
+		"LS_LocalSQLServer_properties_typeProperties_userName": {
+			"value": "adf_reader"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
