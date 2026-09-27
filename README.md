@@ -10,6 +10,20 @@ covering design, ETL, star schema modelling, and cloud migration.
 - **Modelling**: Star Schema with two fact tables (Constellation Schema)
 - **SCD Strategy**: Type 2 for DimCustomer and DimProduct
 
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Source | SQL Server 2019 (AdventureWorks2019 OLTP) |
+| Orchestration | Azure Data Factory (with Self-Hosted Integration Runtime) |
+| Storage | Azure Data Lake Storage Gen2 (raw / curated / logs) |
+| Compute | Azure Databricks (Serverless, PySpark) |
+| Storage Format | Parquet (raw) + Delta Lake (curated) |
+| Governance | Unity Catalog (Storage Credential + External Location) |
+| Local DW | SQL Server (AdventureWorksDW) |
+| Modelling | Star Schema (Constellation), SCD Type 2 |
+
+
 ## Repository Structure
 
 | Folder | Purpose |
@@ -49,8 +63,24 @@ For full details, see [06-docs/design-decisions.md](06-docs/design-decisions.md)
 - [x] Dimension loading (5 dimensions)
 - [x] Fact loading (2 fact tables)
 - [x] Data validation (reconciliation passed)
-- [x] Azure migration - Stage 4.1 (DimDate)
+- [x] Azure migration (ADLS + ADF + Databricks)
+- [x] PySpark transformations (Delta Lake)
+- [x] Advanced PySpark (window functions, MERGE INTO, broadcast join)
 - [ ] Power BI report
+
+
+## Key Achievements
+
+- Built an end-to-end data warehouse from AdventureWorks OLTP (60+ tables) 
+  to a star schema with 2 fact tables and 5 dimensions
+- Migrated the entire ETL pipeline to Azure: ADF extracts 14 source tables 
+  to ADLS, Databricks (PySpark) transforms them into Delta Lake
+- Validated row counts and totals against OLTP — 100% reconciliation
+- Implemented SCD Type 2 with Delta Lake MERGE INTO
+- Applied window functions (RANK, DENSE_RANK, ROW_NUMBER) and broadcast 
+  joins for performance optimisation
+- Configured Unity Catalog with Managed Identity for secure ADLS access
+
 
 ## Author
 
