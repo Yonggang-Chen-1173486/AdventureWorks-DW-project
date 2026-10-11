@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: gold_sales_by_category
+    description: "Gold layer: Sales aggregated by product category and subcategory"
+    columns:
+      - name: CategoryName
+        description: "Product category"
+      - name: SubcategoryName
+        description: "Product subcategory"
+      - name: total_sales
+        description: "Sum of LineTotal"
+        tests:
+          - not_null
+
+  - name: gold_sales_by_month
+    description: "Gold layer: Sales aggregated by year and month"
+    columns:
+      - name: Year
+        description: "Calendar year"
+        tests:
+          - not_null
+      - name: Month
+        description: "Calendar month number"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      - name: total_sales
+        description: "Sum of LineTotal"
+        tests:
+          - not_null
+
+  - name: gold_top_customers
+    description: "Gold layer: Customer sales with ranking"
+    columns:
+      - name: CustomerID
+        description: "Customer identifier"
+        tests:
+          - not_null
+      - name: total_sales
+        description: "Total sales amount"
+        tests:
+          - not_null
+      - name: sales_rank
+        description: "Rank by total sales, descending"
+        tests:
+          - not_null
+
+  - name: gold_territory_performance
+    description: "Gold layer: Sales by territory"
+    columns:
+      - name: TerritoryName
+        description: "Sales territory"
+        tests:
+          - not_null
+      - name: total_sales
+        description: "Total sales amount"
+        tests:
+          - not_null

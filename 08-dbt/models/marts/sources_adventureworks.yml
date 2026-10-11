@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: adventureworks
+    database: adb_adventureworks_dw
+    schema: default
+    tables:
+      - name: FactSales
+      - name: DimProduct
+      - name: DimCustomer
+      - name: DimDate
+      - name: DimTerritory
+      - name: DimSalesPerson
+      - name: FactOrderHeader
