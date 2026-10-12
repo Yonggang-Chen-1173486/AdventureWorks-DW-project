@@ -1,6 +1,6 @@
 # AdventureWorks Data Warehouse Project
 
-An end-to-end data warehouse project built on AdventureWorks OLTP, covering design, ETL, star schema modelling, cloud migration, and Power BI reporting.
+An end-to-end data warehouse project built on AdventureWorks OLTP, covering design, ETL, star schema modelling, cloud migration, Power BI reporting, and dbt transformations.
 
 ---
 
@@ -11,6 +11,7 @@ An end-to-end data warehouse project built on AdventureWorks OLTP, covering desi
 - **Modelling**: Star Schema (Constellation) with two fact tables
 - **SCD Strategy**: Type 2 for DimCustomer and DimProduct
 - **Architecture**: Medallion (Bronze, Silver, Gold)
+- **Transformation**: PySpark + dbt
 - **Reporting**: Power BI with DAX, drill-down, and Row-Level Security
 
 ---
@@ -26,6 +27,7 @@ An end-to-end data warehouse project built on AdventureWorks OLTP, covering desi
 | `05-validation/` | Reconciliation and data quality queries |
 | `06-docs/` | Data dictionary and lessons learned |
 | `07-powerbi/` | Power BI report — semantic model, DAX measures, RLS, drill-down |
+| `08-dbt/` | dbt project — Gold layer rebuilt with SQL models, tests, and docs |
 
 ---
 
@@ -36,9 +38,10 @@ An end-to-end data warehouse project built on AdventureWorks OLTP, covering desi
 | Source | SQL Server 2019 (AdventureWorks2019 OLTP) |
 | Orchestration | Azure Data Factory (with Self-Hosted Integration Runtime) |
 | Storage | Azure Data Lake Storage Gen2 (raw, curated, gold, logs) |
-| Compute | Azure Databricks (Serverless, PySpark) |
+| Compute | Azure Databricks (Serverless, PySpark) + Databricks SQL Warehouse |
 | Storage Format | Parquet (raw) + Delta Lake (curated + gold) |
 | Governance | Unity Catalog (Storage Credential + External Location) |
+| Transformation | PySpark + dbt (dbt-databricks adapter) |
 | Local DW | SQL Server (AdventureWorksDW) |
 | Modelling | Star Schema (Constellation), SCD Type 2 |
 | Reporting | Power BI (Power Query, DAX, RLS, drill-down) |
@@ -65,7 +68,7 @@ The project follows a Medallion Architecture:
 | Silver | ADLS `curated/` | Delta Lake | Cleaned, joined, modelled dimensions and facts |
 | Gold | ADLS `gold/` | Delta Lake | Aggregated business metrics for reporting and AI |
 
-See [04-azure/](04-azure/) for ADF pipelines and Databricks notebooks.
+The Gold layer is implemented **twice** — once with PySpark (see [04-azure/](04-azure/)) and once with dbt (see [08-dbt/](08-dbt/)) — to demonstrate both approaches.
 
 ---
 
@@ -76,6 +79,7 @@ See [04-azure/](04-azure/) for ADF pipelines and Databricks notebooks.
 - Implemented a complete Medallion Architecture (Bronze, Silver, Gold) with 4 aggregated Gold tables: SalesByMonth, SalesByCategory, TopCustomers, and TerritoryPerformance.
 - Implemented SCD Type 2 using Delta Lake MERGE INTO, with valid_from / valid_to / is_current tracking; achieved 100% reconciliation of row counts and totals against the OLTP source.
 - Configured Unity Catalog with Managed Identity for secure ADLS access, and set up a Self-Hosted Integration Runtime for on-premises SQL Server connectivity.
+- Rebuilt the Gold layer using dbt on Databricks SQL Warehouse — defining sources, SQL models, and declarative YAML data tests, with auto-generated documentation and a full lineage graph; all tests passed and output reconciled against the PySpark implementation.
 - Built an end-to-end Power BI report sourcing directly from OLTP — covering Power Query cleaning, star schema modelling, 11 DAX measures (time intelligence, ranking, ratio), date hierarchy drill-down, and Row-Level Security.
 
 ---
@@ -95,6 +99,7 @@ See [04-azure/](04-azure/) for ADF pipelines and Databricks notebooks.
 - [x] Complete Medallion Architecture (Bronze, Silver, Gold)
 - [x] ADF Git integration
 - [x] Power BI report (Power Query, DAX, RLS, drill-down)
+- [x] dbt project (sources, SQL models, data tests, docs, lineage graph)
 
 ---
 
