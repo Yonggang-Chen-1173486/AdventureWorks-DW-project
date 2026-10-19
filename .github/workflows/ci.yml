@@ -50,7 +50,7 @@ jobs:
         run: |
           mkdir -p ~/.dbt
           cat <<EOF > ~/.dbt/profiles.yml
-          adventureworks_dw:
+          adventureworks_dbt:
             target: dev
             outputs:
               dev:
