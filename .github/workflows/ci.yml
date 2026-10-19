@@ -2,12 +2,12 @@ name: Data Pipeline CI
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: [ "main" ]
 
 jobs:
-  # 1. 检查 Python/PySpark 代码格式
+  # 1. 检查 Python 代码格式
   python-lint:
     runs-on: ubuntu-latest
     steps:
@@ -26,7 +26,7 @@ jobs:
 
       - name: Run Flake8 (Python Linting)
         run: |
-          # 忽略一些常见的长行报错
+          # 忽略一些个人项目常见的长行报错 (E501)
           flake8 04-azure/ --count --select=E9,F63,F7,F82 --show-source --statistics
 
   # 2. 检查 dbt 模型语法和配置
@@ -50,7 +50,7 @@ jobs:
         run: |
           mkdir -p ~/.dbt
           cat <<EOF > ~/.dbt/profiles.yml
-          adventureworks_dbt:
+          adventureworks_dw:
             target: dev
             outputs:
               dev:
