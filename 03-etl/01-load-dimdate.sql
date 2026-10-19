@@ -5,7 +5,7 @@ GO
 DELETE FROM DimDate;
 GO
 
-DECLARE @StartDate DATE = '2011-01-01';
+DECLARE @StartDate DATE = '2011-01-03';
 DECLARE @EndDate   DATE = '2014-12-31';
 
 WHILE @StartDate <= @EndDate
