@@ -1,0 +1,49 @@
+name: Data Pipeline CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy-databricks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Databricks CLI
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+
+      - name: Deploy Notebooks to Databricks
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: |
+          # 将 PySpark Notebooks 同步到 Databricks 工作区
+          databricks workspace import-dir ./04-azure/notebooks /Shared/AdventureWorks/notebooks --overwrite
+
+  deploy-adf:
+    runs-on: ubuntu-latest
+    needs: deploy-databricks # 等 Databricks 部署完再部署 ADF
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy ADF
+        uses: azure/data-factory-deploy-action@v1
+        with:
+          resourceGroup: "your-adf-resource-group"
+          dataFactoryName: "your-adf-name"
+          # ADF 导出模板通常放在 04-azure 目录下
+          armTemplate: "./04-azure/ARMTemplateForFactory.json" 

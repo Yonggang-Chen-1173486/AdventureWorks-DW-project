@@ -1,0 +1,68 @@
+name: Data Pipeline CI
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  # 1. 检查 Python/PySpark 代码格式
+  python-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8
+
+      - name: Run Flake8 (Python Linting)
+        run: |
+          # 忽略一些常见的长行报错
+          flake8 04-azure/ --count --select=E9,F63,F7,F82 --show-source --statistics
+
+  # 2. 检查 dbt 模型语法和配置
+  dbt-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dbt
+        run: |
+          python -m pip install --upgrade pip
+          pip install dbt-databricks
+
+      - name: Create dummy profiles.yml for CI
+        run: |
+          mkdir -p ~/.dbt
+          cat <<EOF > ~/.dbt/profiles.yml
+          adventureworks_dw:
+            target: dev
+            outputs:
+              dev:
+                type: databricks
+                host: "dummy.cloud.databricks.com"
+                http_path: "/sql/1.0/warehouses/dummy"
+                token: "dummy_token"
+                schema: default
+          EOF
+
+      - name: Run dbt parse
+        working-directory: ./08-dbt
+        run: |
+          # dbt parse 只验证 YAML 和 SQL 语法，不需要真正连接 Databricks
+          dbt parse --profiles-dir ~/.dbt
