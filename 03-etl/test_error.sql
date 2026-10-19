@@ -1,0 +1,1 @@
+select id,name from customer where id=1
