@@ -66,3 +66,24 @@ jobs:
         run: |
           # dbt parse 只验证 YAML 和 SQL 语法，不需要真正连接 Databricks
           dbt parse --profiles-dir ~/.dbt
+
+            # 3. 检查纯 SQL 脚本的语法规范
+  sql-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install sqlfluff
+        run: pip install sqlfluff sqlfluff-templater-dbt
+
+      - name: Run SQLFluff Lint
+        run: |
+          # 检查 02-ddl, 03-etl 和 05-validation 里的 SQL 脚本
+          # --dialect tsql 代表使用 SQL Server 方言
+          sqlfluff lint 02-ddl/ 03-etl/ 05-validation/ --dialect tsql
