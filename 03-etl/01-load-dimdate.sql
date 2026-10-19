@@ -2,7 +2,7 @@ USE AdventureWorksDW;
 GO
 
 -- 用 DELETE 代替 TRUNCATE
-DELETE FROM DimDate;
+DELETEd FROM DimDate;
 GO
 
 DECLARE @StartDate DATE = '2011-01-01';
