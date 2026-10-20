@@ -6,7 +6,11 @@
 				"name": "Testing P2 Alert",
 				"type": "Fail",
 				"dependsOn": [],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"message": "failing",
+					"errorCode": "P2"
+				}
 			}
 		],
 		"annotations": []
