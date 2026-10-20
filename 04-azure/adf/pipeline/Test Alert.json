@@ -5,6 +5,8 @@
 			{
 				"name": "Testing P2 Alert",
 				"type": "Fail",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
