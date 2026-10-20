@@ -1,0 +1,14 @@
+{
+	"name": "Test Alert",
+	"properties": {
+		"activities": [
+			{
+				"name": "Testing P2 Alert",
+				"type": "Fail",
+				"dependsOn": [],
+				"userProperties": []
+			}
+		],
+		"annotations": []
+	}
+}
